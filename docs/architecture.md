@@ -1,6 +1,6 @@
 # Architecture Proposal: 2D Model/State (MuJoCo-inspired)
 
-## 2.1 Immutable Model (Model2D)
+## 1 Immutable Model (Model2D)
 Stores constant data:
 - Kinematic tree: `parent` (parent body indices)
 - Link transforms: `Xtree` (list of 3×3 SE(2) matrices)
@@ -9,17 +9,17 @@ Stores constant data:
 - Gravity: `gravity`
 - `floating` flag (if True, first 3 DOF are x, y, theta)
 
-## 2.2 Mutable State (State2D)
+## 2 Mutable State (State2D)
 Stores time‑varying data:
 - `q` – generalized coordinates (joint angles/displacements + optional x, y, theta)
 - `qd` – generalized velocities
 - Helper methods: `get_base_pose()`, `get_joint_positions()`, `get_joint_velocities()`
 
-## 2.3 Fixed vs Floating Base
+## 3 Fixed vs Floating Base
 - Fixed‑base: `floating=False`, `nq = number of joints`
 - Floating‑base: `floating=True`, `nq = 3 + number of joints`
 
-## 3. Interfaces
+## 4 Interfaces
 ```python
 @dataclass(frozen=True)
 class Model2D:
